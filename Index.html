@@ -30,12 +30,13 @@
     <!-- Navbar Menu -->
     <nav class="navbar navbar-light bg-white navbar-expand-lg">
       <div class="container">
-        <a class="navbar-brand h1 mb-1 me-4" href="#">Meu aprendizado WD!</a>
+        <a class="navbar-brand ms-0 me-4" href="#inicio">Meu aprendizado WD!</a>
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSite"
+          aria-label="Alternar navegação"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -82,7 +83,8 @@
               class="form-control ms-4 me-2"
               type="search"
               name="busca"
-              placeholder="Buscar..."
+              placeholder="Buscar…"
+              aria-label="Buscar"
             />
             <button class="btn btn-secondary" type="submit">Ok</button>
           </form>
@@ -114,7 +116,7 @@
             alt=""
           />
           <div class="carousel-caption d-none d-md-block text-danger">
-            <h1>1 - Curso de bootstrap</h1>
+            <h5>1 - Curso de bootstrap</h5>
             <p class="lead">
               Construir um site simples em bootstrap desde o começo
             </p>
@@ -127,7 +129,7 @@
             alt=""
           />
           <div class="carousel-caption d-none d-md-block text-warning">
-            <h1>2 - Curso de Bootstrap</h1>
+            <h5>2 - Curso de Bootstrap</h5>
             <p class="lead">
               Aplicando a funcionalidade de carousel do bootstrap, isso ira
               fazer com que estas imagens tenham o efeito de slides
@@ -141,7 +143,7 @@
             alt=""
           />
           <div class="carousel-caption d-none d-md-block text-primary">
-            <h1>3 - Curso de Bootstrap</h1>
+            <h5>3 - Curso de Bootstrap</h5>
             <p class="lead">
               Aplicando a funcionalidade de carousel do bootstrap, isso ira
               fazer com que estas imagens tenham o efeito de slides
@@ -155,7 +157,7 @@
             alt=""
           />
           <div class="carousel-caption d-none d-md-block text-light">
-            <h1>4 - Curso de bootstrap</h1>
+            <h5>4 - Curso de bootstrap</h5>
             <p class="lead">
               Aplicando a funcionalidade de carousel do bootstrap, isso ira
               fazer com que estas imagens tenham o efeito de slides
@@ -173,7 +175,7 @@
         data-bs-slide="prev"
       >
         <span class="carousel-control-prev-icon"></span>
-        <span class="visually-hidden">Avançar</span>
+        <span class="visually-hidden">Anterior</span>
       </a>
       <a
         class="carousel-control-next"
@@ -182,7 +184,7 @@
         data-bs-slide="next"
       >
         <span class="carousel-control-next-icon"></span>
-        <span class="visually-hidden">Anterior</span>
+        <span class="visually-hidden">Avançar</span>
       </a>
       <!--Carousel - navegação lateal anterior e proxima Fim.-->
     </div>
@@ -493,7 +495,10 @@
             <i class="bi bi-send-fill text-primary" aria-hidden="true"></i>
             Entre em Contato Conosco:
           </h1>
-          <p>"Formulario tratado e com validação de dados para o correto preenchimento."</p>
+          <p>
+            "Formulario tratado e com validação de dados para o correto
+            preenchimento."
+          </p>
         </div>
       </div>
       <div class="row justify-content-center mb-5">
