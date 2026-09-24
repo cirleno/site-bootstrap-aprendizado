@@ -21,7 +21,8 @@
     <link rel="apple-touch-icon" href="icon.png" />
     <link rel="manifest" href="site.webmanifest" />
     <meta name="theme-color" content="#fafafa" />
-    <!-- Latest compiled and minified CSS -->
+    <!-- Otimização de conexão com os CDNs -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 
     <!-- Bootstrap CSS -->
     <link
@@ -126,6 +127,8 @@
           <img
             src="Images/Screen Shot 10-05-17 at 09.55 PM 004.PNG"
             class="d-block w-100"
+            width="1600"
+            height="750"
             alt=""
           />
           <div class="carousel-caption d-none d-md-block text-danger">
@@ -139,6 +142,8 @@
           <img
             src="Images/Screen Shot 10-29-17 at 11.20 PM 001.PNG"
             class="d-block w-100"
+            width="1600"
+            height="750"
             alt=""
           />
           <div class="carousel-caption d-none d-md-block text-warning">
@@ -153,6 +158,8 @@
           <img
             src="Images/Screen Shot 10-29-17 at 11.20 PM 002.PNG"
             class="d-block w-100"
+            width="1600"
+            height="750"
             alt=""
           />
           <div class="carousel-caption d-none d-md-block text-primary">
@@ -167,6 +174,8 @@
           <img
             src="Images/Screen Shot 10-29-17 at 11.20 PM 003.PNG"
             class="d-block w-100"
+            width="1600"
+            height="750"
             alt=""
           />
           <div class="carousel-caption d-none d-md-block text-light">
@@ -332,7 +341,14 @@
       <div id="servicos" class="row justify-content-sm-center">
         <div class="col-sm-6 col-md-4">
           <div class="card mb-4">
-            <img class="card-img-top" src="Images/IMG_5918.PNG" alt="" />
+            <img
+              class="card-img-top"
+              src="Images/IMG_5918.PNG"
+              width="640"
+              height="960"
+              loading="lazy"
+              alt=""
+            />
             <div class="card-body">
               <h4 class="card-title">Card A</h4>
               <h6 class="card-subtitle mb-2 text-muted">menu card A</h6>
@@ -359,7 +375,14 @@
 
         <div class="col-sm-6 col-md-4">
           <div class="card mb-4">
-            <img class="card-img-top" src="Images/IMG_5919.PNG" alt="" />
+            <img
+              class="card-img-top"
+              src="Images/IMG_5919.PNG"
+              width="640"
+              height="960"
+              loading="lazy"
+              alt=""
+            />
             <div class="card-body">
               <h4 class="card-title">Card B</h4>
               <h6 class="card-subtitle mb-2 text-muted">menu card B</h6>
@@ -375,7 +398,14 @@
 
         <div class="col-sm-6 col-md-4">
           <div class="card mb-4">
-            <img class="card-img-top" src="Images/IMG_5920.PNG" alt="" />
+            <img
+              class="card-img-top"
+              src="Images/IMG_5920.PNG"
+              width="640"
+              height="960"
+              loading="lazy"
+              alt=""
+            />
             <div class="card-body">
               <h4 class="card-title">Card C</h4>
               <h6 class="card-subtitle mb-2 text-muted">menu card C</h6>
@@ -509,8 +539,8 @@
             Entre em Contato Conosco:
           </h1>
           <p>
-            "Formulario tratado e com validação de dados para o correto
-            preenchimento."
+            “Formulário tratado e com validação de dados para o correto
+            preenchimento.”
           </p>
         </div>
       </div>
@@ -522,10 +552,11 @@
                 <label for="inputName">Nome</label>
                 <input
                   type="text"
+                  autocomplete="given-name"
                   class="form-control"
                   id="inputName"
                   name="nome"
-                  placeholder="Nome..."
+                  placeholder="Nome…"
                   minlength="2"
                   pattern="[A-Za-zÀ-ÖØ-öø-ÿ'\s]+"
                   required
@@ -538,10 +569,11 @@
                 <label for="inputLastName">Sobrenome</label>
                 <input
                   type="text"
+                  autocomplete="family-name"
                   class="form-control"
                   id="inputLastName"
                   name="sobrenome"
-                  placeholder="Sobrenome..."
+                  placeholder="Sobrenome…"
                   minlength="2"
                   pattern="[A-Za-zÀ-ÖØ-öø-ÿ'\s]+"
                   required
@@ -556,10 +588,11 @@
                 <label for="inputEnd">Endereço</label>
                 <input
                   type="text"
+                  autocomplete="street-address"
                   class="form-control"
                   id="inputEnd"
                   name="endereco"
-                  placeholder="Endereço..."
+                  placeholder="Endereço…"
                   minlength="5"
                   required
                 />
@@ -573,10 +606,11 @@
                 <label for="inputCity">Cidade</label>
                 <input
                   type="text"
+                  autocomplete="address-level2"
                   class="form-control"
                   id="inputCity"
                   name="cidade"
-                  placeholder="Cidade..."
+                  placeholder="Cidade…"
                   minlength="2"
                   pattern="[A-Za-zÀ-ÖØ-öø-ÿ'\s]+"
                   required
@@ -589,11 +623,12 @@
                 <label for="inputEst">Estado</label>
                 <select
                   class="form-select"
+                  autocomplete="address-level1"
                   name="estado"
                   id="inputEst"
                   required
                 >
-                  <option value="" selected disabled>Escolha...</option>
+                  <option value="" selected disabled>Escolha…</option>
                 </select>
                 <div class="invalid-feedback">
                   Por favor, selecione um estado.
@@ -603,6 +638,8 @@
                 <label for="inputcep">CEP</label>
                 <input
                   type="text"
+                  inputmode="numeric"
+                  autocomplete="postal-code"
                   id="inputcep"
                   name="cep"
                   class="form-control"
@@ -634,17 +671,17 @@
             <div class="row">
               <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary">Enviar</button>
-                <a
-                  tabindex="0"
+                <button
+                  type="button"
                   class="btn btn-secondary ms-2"
-                  role="button"
                   data-bs-toggle="popover"
                   data-bs-placement="right"
                   data-bs-trigger="focus"
                   title="Texto de ajuda"
                   data-bs-content="O que deve ser preenchido neste form"
-                  >Ajuda!</a
                 >
+                  Ajuda!
+                </button>
               </div>
             </div>
           </form>
@@ -666,7 +703,14 @@
             ></button>
           </div>
           <div class="modal-body">
-            <img class="mb-2" src="Images/ScreenShot025.jpg" alt="" />
+            <img
+              class="mb-2"
+              src="Images/ScreenShot025.jpg"
+              width="592"
+              height="173"
+              loading="lazy"
+              alt=""
+            />
             <div class="container-fluid">
               <div class="row">
                 <div class="col-6">
