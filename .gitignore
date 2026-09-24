@@ -1,0 +1,11 @@
+node_modules/
+.sass-cache/
+.cache/
+dist/
+*.log
+.DS_Store
+Thumbs.db
+.agents/
+agent/
+skills-lock.json
+Novo Documento de Texto.txt
