@@ -7,3 +7,20 @@
   overflow: auto;
   height: 330px;
 }
+
+#btnTopo {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 1030;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+#btnTopo.mostrar {
+  opacity: 1;
+  visibility: visible;
+}
