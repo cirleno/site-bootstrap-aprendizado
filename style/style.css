@@ -1,6 +1,9 @@
-  .scrollspySite {
-  	position: relative;
-  	overflow:  auto;
-  	height: 330px;
+.bg-white {
+  background-color: #fff;
+}
 
-  }
+.scrollspySite {
+  position: relative;
+  overflow: auto;
+  height: 330px;
+}
