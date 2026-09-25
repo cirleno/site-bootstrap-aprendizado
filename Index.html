@@ -92,15 +92,28 @@
               </div>
             </li>
           </ul>
-          <form class="d-flex" role="search">
+
+          <form
+            id="formBusca"
+            class="d-flex position-relative"
+            role="search"
+          >
             <input
+              id="campoBusca"
               class="form-control ms-4 me-2"
               type="search"
               name="busca"
-              placeholder="Buscar…"
-              aria-label="Buscar"
+              placeholder="Buscar no site…"
+              aria-label="Buscar no site"
+              aria-controls="resultadosBusca"
             />
-            <button class="btn btn-secondary" type="submit">Ok</button>
+            <button class="btn btn-secondary" type="submit">Buscar</button>
+            <div
+              id="resultadosBusca"
+              class="position-absolute top-100 end-0 mt-3 p-2 bg-white border rounded shadow d-none"
+              aria-label="Resultados da busca"
+              aria-live="polite"
+            ></div>
           </form>
         </div>
       </div>
@@ -851,6 +864,181 @@
         .forEach(function (el) {
           new bootstrap.Popover(el);
         });
+
+      (() => {
+        "use strict";
+
+        const formularioBusca = document.getElementById("formBusca");
+        const campoBusca = document.getElementById("campoBusca");
+        const resultadosBusca = document.getElementById("resultadosBusca");
+        const colapsoNavbar = document.getElementById("navbarSite");
+
+        if (
+          formularioBusca &&
+          campoBusca &&
+          resultadosBusca &&
+          colapsoNavbar
+        ) {
+          const areasBusca = [
+            {
+              elemento: document.getElementById("carouselSite"),
+              titulo: "Destaques",
+              destino: "#inicio",
+            },
+            {
+              elemento: document.querySelector("#inicio > .row"),
+              titulo: "Sobre o projeto",
+              destino: "#inicio",
+            },
+            {
+              elemento: document.getElementById("servicos"),
+              titulo: "Cards",
+              destino: "#servicos",
+            },
+            {
+              elemento: document.getElementById("videos"),
+              titulo: "Vídeos",
+              destino: "#videos",
+            },
+            {
+              elemento: document.getElementById("contato"),
+              titulo: "Contato",
+              destino: "#contato",
+            },
+          ].filter(function (area) {
+            return area.elemento;
+          });
+
+          const normalizar = function (texto) {
+            return texto
+              .normalize("NFD")
+              .replace(/[\u0300-\u036f]/g, "")
+              .toLocaleLowerCase("pt-BR");
+          };
+
+          const mostrarMensagem = function (mensagem, classe) {
+            const aviso = document.createElement("div");
+            aviso.className = `alert ${classe} mb-0 py-2`;
+            aviso.textContent = mensagem;
+            resultadosBusca.replaceChildren(aviso);
+            resultadosBusca.classList.remove("d-none");
+          };
+
+          const ocultarResultados = function () {
+            resultadosBusca.replaceChildren();
+            resultadosBusca.classList.add("d-none");
+          };
+
+          const contarOcorrencias = function (texto, termo) {
+            let quantidade = 0;
+            let indice = texto.indexOf(termo);
+
+            while (indice !== -1) {
+              quantidade += 1;
+              indice = texto.indexOf(termo, indice + termo.length);
+            }
+
+            return quantidade;
+          };
+
+          campoBusca.addEventListener("input", ocultarResultados);
+          campoBusca.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+              ocultarResultados();
+            }
+          });
+          document.addEventListener("click", function (event) {
+            if (!formularioBusca.contains(event.target)) {
+              ocultarResultados();
+            }
+          });
+
+          formularioBusca.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const consulta = campoBusca.value.trim();
+            if (consulta.length < 2) {
+              mostrarMensagem(
+                "Digite ao menos 2 caracteres para buscar.",
+                "alert-warning",
+              );
+              return;
+            }
+
+            const termo = normalizar(consulta);
+            const resultados = areasBusca.flatMap(function (area) {
+              const texto = area.elemento.textContent.replace(/\s+/g, " ").trim();
+              const textoNormalizado = normalizar(texto);
+              const indice = textoNormalizado.indexOf(termo);
+
+              if (indice === -1) {
+                return [];
+              }
+
+              const inicio = Math.max(0, indice - 55);
+              const fim = Math.min(texto.length, indice + termo.length + 100);
+              const prefixo = inicio > 0 ? "…" : "";
+              const sufixo = fim < texto.length ? "…" : "";
+              const ocorrencias = contarOcorrencias(textoNormalizado, termo);
+
+              return [
+                {
+                  destino: area.destino,
+                  titulo: area.titulo,
+                  trecho: `${prefixo}${texto.slice(inicio, fim)}${sufixo}`,
+                  ocorrencias,
+                },
+              ];
+            });
+
+            if (resultados.length === 0) {
+              mostrarMensagem(
+                `Nenhum resultado encontrado para “${consulta}”.`,
+                "alert-secondary",
+              );
+              return;
+            }
+
+            const lista = document.createElement("div");
+            lista.className = "list-group";
+
+            resultados.forEach(function (resultado) {
+              const link = document.createElement("a");
+              const titulo = document.createElement("strong");
+              const trecho = document.createElement("span");
+              const quantidade = document.createElement("small");
+
+              link.className = "list-group-item list-group-item-action";
+              link.href = resultado.destino;
+              titulo.textContent = resultado.titulo;
+              trecho.className = "d-block text-secondary small my-1";
+              trecho.textContent = resultado.trecho;
+              quantidade.className = "d-block text-secondary";
+              quantidade.textContent = `${resultado.ocorrencias} ${
+                resultado.ocorrencias === 1
+                  ? "ocorrência"
+                  : "ocorrências"
+              }`;
+              link.append(titulo, trecho, quantidade);
+              link.addEventListener("click", function () {
+                ocultarResultados();
+
+                if (window.innerWidth < 992) {
+                  const instanciaColapso =
+                    bootstrap.Collapse.getInstance(colapsoNavbar);
+                  if (instanciaColapso) {
+                    instanciaColapso.hide();
+                  }
+                }
+              });
+              lista.appendChild(link);
+            });
+
+            resultadosBusca.replaceChildren(lista);
+            resultadosBusca.classList.remove("d-none");
+          });
+        }
+      })();
 
       var btnTopo = document.getElementById("btnTopo");
       window.addEventListener("scroll", function () {

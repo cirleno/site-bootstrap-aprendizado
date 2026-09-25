@@ -2,6 +2,67 @@
   color: rgba(0, 0, 0, 0.8);
 }
 
+#resultadosBusca {
+  width: min(32rem, calc(100vw - 2rem));
+  max-height: min(24rem, 60vh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  z-index: 1050;
+}
+
+#resultadosBusca::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  right: 32px;
+  width: 0;
+  height: 0;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid var(--bs-border-color);
+  border-left: 8px solid transparent;
+}
+
+#resultadosBusca .list-group-item {
+  overflow-wrap: anywhere;
+}
+
+#servicos .card {
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+#servicos .card:is(:hover, :focus-within) {
+  transform: translateY(-8px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.18);
+}
+
+#servicos .card-img-top {
+  height: 680px;
+  object-fit: cover;
+  transition:
+    transform 0.4s ease,
+    filter 0.4s ease;
+}
+
+#servicos .card:is(:hover, :focus-within) .card-img-top {
+  transform: scale(1.05);
+  filter: brightness(1.08) saturate(1.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #servicos .card,
+  #servicos .card-img-top {
+    transition: none;
+  }
+
+  #servicos .card:is(:hover, :focus-within),
+  #servicos .card:is(:hover, :focus-within) .card-img-top {
+    transform: none;
+  }
+}
+
 .scrollspySite {
   position: relative;
   overflow: auto;

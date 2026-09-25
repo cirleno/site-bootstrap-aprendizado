@@ -1,18 +1,18 @@
-# AGENTS.md
+# Repository guide
 
-## Overview
-- Static single-page Bootstrap 5 exercise site (pt-BR text). Only page: `Index.html`. No build system, no tests, no lint.
-- Based on the "Curso de Bootstrap 4 (Ricardo Sanches)" YouTube series; body text is intentional Lorem/Mussum demo filler.
+## Structure
+- Static, pt-BR Bootstrap exercise site. `Index.html` is the app entrypoint; `404.html` is a standalone error page; app-wide overrides live in `style/style.css`.
+- The page originated in Ricardo Sanches' Bootstrap 4 course. Lorem/Mussum paragraphs and dummy form data are intentional exercise content, not placeholder defects.
+- `package.json` is metadata only: there are no local dependencies, scripts, build, test, lint, formatter, or typecheck commands. Do not add an npm workflow unless requested.
 
-## Running
-- No dependencies required — the page loads everything from CDNs: Bootstrap 5.3.8 (CSS + JS bundle from jsDelivr), Bootstrap Icons 1.11.3, jQuery **not** used (Bootstrap 5 = vanilla JS). Just open `Index.html` in the browser.
-- Requires internet for the CDN links in `<head>` and at the end of `</body>`.
+## Preview and verification
+- No install step. Serve the repository root over HTTP and open `/Index.html`; a `file://` preview will not resolve the leading-slash favicon links faithfully.
+- Bootstrap 5.3.8 CSS/bundle and Bootstrap Icons 1.11.3 are pinned in `Index.html` via jsDelivr; internet is required for CDN assets and YouTube embeds. If changing a CDN version, update its SRI hash.
+- No automated checks are defined; verify UI changes manually in a browser, including responsive navigation and JavaScript components.
 
-## Gotchas
-- Target is Bootstrap 5.3 (`data-bs-*` attributes, `ratio ratio-16x9`, `visually-hidden`, `btn-close`) — don't reintroduce Bootstrap 4/alpha syntax (`data-toggle`, `data-target`, `jumbotron`, `embed-responsive`, `navbar-inverse`, `navbar-toggleable-*`, `sr-only`, `ml-`/`mr-`).
-- Backend has no jQuery; interactive bits use vanilla JS (`document.querySelectorAll` + `new bootstrap.Popover(...)` for the only popover).
-- Custom CSS lives only in `style/style.css`. `bg-white` is native Bootstrap (don't re-add the old custom rule).
-- `.agents/`, `agent/`, `skills-lock.json`, and `Novo Documento de Texto.txt` are gitignored local tooling, not part of the site.
-
-## Conventions
-- Keep user-facing text in pt-BR.
+## Constraints
+- Runtime target is Bootstrap 5.3, not the course's Bootstrap 4: retain `data-bs-*`, current spacing/accessibility utilities, and vanilla JavaScript. Do not restore jQuery, `data-toggle`, `jumbotron`, `embed-responsive`, `sr-only`, or `ml-*`/`mr-*`.
+- Custom JavaScript is inline at the end of `Index.html`; there is no backend, and the contact form only performs client-side validation.
+- Root-relative URLs assume the repository is deployed at its root. Preserve the exact case of `Index.html`, `Images/`, and `style/`.
+- Keep user-facing copy in pt-BR and honor `.editorconfig` (UTF-8, LF, two spaces, final newline).
+- `.agents/`, `agent/`, `skills-lock.json`, and `Novo Documento de Texto.txt` are gitignored local tooling, not site sources.
