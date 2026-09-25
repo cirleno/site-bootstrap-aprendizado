@@ -2,6 +2,36 @@
   color: rgba(0, 0, 0, 0.8);
 }
 
+#navbarSite .navbar-nav .nav-link:not(.disabled) {
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+#navbarSite .navbar-nav .nav-link:not(.disabled)::after {
+  content: "";
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.35rem;
+  left: 0.75rem;
+  height: 2px;
+  background-color: var(--bs-primary);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s ease;
+}
+
+#navbarSite .navbar-nav .nav-link:not(.disabled):hover,
+#navbarSite .navbar-nav .nav-link:not(.disabled):focus-visible,
+#navbarSite .navbar-nav .nav-link:not(.disabled).active {
+  color: var(--bs-primary);
+}
+
+#navbarSite .navbar-nav .nav-link:not(.disabled):hover::after,
+#navbarSite .navbar-nav .nav-link:not(.disabled):focus-visible::after,
+#navbarSite .navbar-nav .nav-link:not(.disabled).active::after {
+  transform: scaleX(1);
+}
+
 #resultadosBusca {
   width: min(32rem, calc(100vw - 2rem));
   max-height: min(24rem, 60vh);
@@ -52,6 +82,11 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  #navbarSite .navbar-nav .nav-link:not(.disabled),
+  #navbarSite .navbar-nav .nav-link:not(.disabled)::after {
+    transition: none;
+  }
+
   #servicos .card,
   #servicos .card-img-top {
     transition: none;
